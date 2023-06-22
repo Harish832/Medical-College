@@ -1,0 +1,155 @@
+.admission_container{
+    position: relative;
+    border-radius: 6px;
+    padding:20px;
+}
+.admission_container .tag_header{
+    position: relative;
+    font-size: 22px;
+    font-weight: 600;
+    color: #333;
+}
+.admission_container .tag_header::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    height: 3px;
+    width: 37px;
+    border-radius: 8px;
+    background-color: #4070f4;
+}
+.admission_container .tag_form{
+    position: relative;
+    margin-top: 10px;
+    min-height: 500px;
+    background-color: #fff;
+    overflow-y:scroll;
+    overflow-x:hidden;
+}
+.admission_container .tag_form .admission_form{
+    position: absolute;
+    background-color: #fff;
+    transition: 0.3s ease;
+}
+.admission_container .tag_form .admission_form.admission_second{
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(100%);
+}
+.tag_form.secActive .admission_form.admission_second{
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0);
+}
+.tag_form.secActive .admission_form.admission_first{
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-100%);
+    transform: translateY(-100%);
+}
+.admission_container .tag_form .admission_title{
+    display: block;
+    margin-bottom: 8px;
+    font-size: 18px;
+    font-weight: 500;
+    margin: 2px 0;
+    color: #333;
+}
+.admission_container .tag_form .admission_fields{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.tag_form .admission_fields .admission_input-field{
+    display: flex;
+    width: calc(100% / 3 - 15px);
+    flex-direction: column;
+    margin: 2px 0;
+}
+.admission_input-field .tag_label{
+    font-size: 13px;
+    font-weight: 500;
+    color: #000000;
+}
+.admission_input-field .tag_input, .tag_select{
+    outline: none;
+    font-size: 14px;
+    font-weight: 400;
+    color: #333;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+    padding: 0 15px;
+    height: 42px;
+    margin: 8px 0;
+}
+.admission_input-field .tag_input :focus,
+.admission_input-field .tag_select:focus{
+    box-shadow: 0 3px 6px rgba(0,0,0,0.13);
+}
+.admission_input-field .tag_select,
+.admission_input-field .tag_input[type="date"]{
+    color: #707070;
+}
+.admission_input-field .tag_input[type="date"]:valid{
+    color: #333;
+}
+.admission_container .tag_form .tag_button, .admission_backBtn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    max-width: 200px;
+    width: 100%;
+    border: none;
+    outline: none;
+    color: #fff;
+    border-radius: 5px;
+    margin: 20px 0;
+    background-color: #4070f4;
+    transition: all 0.3s linear;
+    cursor: pointer;
+}
+.admission_container .tag_form .admission_btnText{
+    font-size: 14px;
+    font-weight: 400;
+}
+.tag_form .tag_button:hover{
+    background-color: #265df2;
+}
+.tag_form .tag_button i,
+.tag_form .admission_backBtn .tag_i{
+    margin: 0 6px;
+}
+.tag_form .admission_backBtn .tag_i{
+    transform: rotate(180deg);
+}
+.tag_form .admission_buttons{
+    display: flex;
+    align-items: center;
+}
+.tag_form .admission_buttons .tag_button , .admission_backBtn{
+    margin-right: 14px;
+}
+::-webkit-scrollbar {
+    display: none;
+  }
+
+@media (max-width: 750px) {
+    .admission_container .tag_form{
+        overflow-y: scroll;
+    }
+    .admission_container .tag_form::-webkit-scrollbar{
+       display: none;
+    }
+    .tag_form .admission_fields .admission_input-field{
+        width: calc(100% / 2 - 15px);
+    }
+}
+
+@media (max-width: 550px) {
+    .tag_form .admission_fields .admission_input-field{
+        width: 100%;
+    }
+}
