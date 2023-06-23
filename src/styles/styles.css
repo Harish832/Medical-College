@@ -242,3 +242,7 @@
 	background-color: white;
 	margin: auto;
 }
+.custom-gradient{
+	background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);  
+	background-image: linear-gradient(to top, #bbc5ee 0%, #85b0ff 100%);
+}
