@@ -40,7 +40,8 @@
 .tag_form.secActive .admission_form.admission_second{
     opacity: 1;
     pointer-events: auto;
-    transform: translateX(0);
+    transform: translateX(0%);
+    transform: translateY(0%);
 }
 .tag_form.secActive .admission_form.admission_first{
     opacity: 0;

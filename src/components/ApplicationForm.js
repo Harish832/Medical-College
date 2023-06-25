@@ -1,8 +1,10 @@
 import React from 'react'
 import '../styles/application.css'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-const ApplicationForm = () => {
+const ApplicationForm = (props) => {
+    const navigate=useNavigate()
     function sleep(milliseconds) {
         const date = Date.now();
         let currentDate = null;
@@ -10,46 +12,42 @@ const ApplicationForm = () => {
           currentDate = Date.now();
         } while (currentDate - date < milliseconds);
       }
-     
-
+    // const data=props.data
     const [finalData,setFinaldata]=useState({
-        "email": "",
-            "contact_info": {
-                "student_contact_no": "",
-                "student_email_id": "",
-                "mobile_1": "",
-                "mobile_2": "",
-                "mobile_3": "",
-                "guardian_mobile": "",
-            },
-            "student_name": "",
-            "course": "",
-            "quota": "",
-            "date_of_birth": "",
-            "gender": "",
-            "is_hostellite": false,
-            "community": "",
-            "religion": "",
-            "native_place": "",
-            "blood_group": "",
-            "height": 0,
-            "weight": 0,
-            "date_of_admission": "",
-            "mother_tongue": "",
-            "status": 0,
-            "mark_info": {},
-            "parent_info": {
-                "father_name": "",
-                "father_occupation": "",
-                "father_occupation_address": "",
-                "father_phone_number": "",
-                "father_email": "",
-                "mother_name": "",
-                "mother_occupation": "",
-                "mother_occupation_address": "",
-                "mother_phone_number": "",
-                "mother_email": "",
-            },
+        'email' : '',
+        'student_name': '',
+        'course': '',
+        'date_of_birth': '',
+        'gender': '',
+        'is_hostellite': '',
+        'community': '',
+        'religion': '',
+        'native_place': '',
+        'blood_group': '',
+        'height': '',
+        'weight': '',
+        'caste': '',
+        'address_for_communication': '',
+        'date_of_admission': '',
+        'address_local_guardian': '',
+        'nationality': '',
+        'mother_tongue': '',
+        'father_name': '',
+        'father_occupation': '',
+        'father_occupation_address': '',
+        'father_phone_number': '',
+        'father_email': '',
+        'mother_name': '',
+        'mother_occupation': '',
+        'mother_occupation_address': '',
+        'mother_phone_number': '',
+        'mother_email': '',
+        'student_contact_no': '',
+        'student_email_id': '',
+        'mobile_1': '',
+        'mobile_2': '',
+        'mobile_3': '',
+        'guardian_mobile': '',
     })
     const [SectionActive, setSectionActive] = useState("")
     const [formData, setFormData] = useState({
@@ -99,7 +97,7 @@ const ApplicationForm = () => {
         else{
           setSectionActive("secActive")
         }   
-        
+        // setSectionActive("secActive")
     }
     const handlePrev =()=>{
         setSectionActive("")
@@ -120,47 +118,53 @@ const ApplicationForm = () => {
     }
     const handleFormSubmit=(e)=>{
         e.preventDefault();
-        setFinaldata({"email": formData.Email,
-        "contact_info": {
-            "student_contact_no": formData.Mobile,
-            "student_email_id": formData.Email,
-            "mobile_1": formData.Mobile,
-            "mobile_2": formData.MobileFather,
-            "mobile_3": formData.MobileMother,
-            "guardian_mobile": formData.MobileLocal,
-        },
-        "student_name": formData.Name,
-        "course": applicationData.Course,
-        "quota": applicationData.Category,
-        "date_of_birth": formData.Dob,
-        "gender": formData.Gender,
-        "is_hostellite": (formData.Mode==="Hostelite")?true:false,
-        "community": formData.Community,
-        "religion": formData.Religion,
-        "native_place": formData.Native,
-        "blood_group": formData.Blood,
-        "height": formData.Height,
-        "weight": formData.Weight,
-        "date_of_admission": applicationData.DateofAdmit,
-        "mother_tongue": formData.Language,
-        "status": 0,
-        "mark_info": {},
-        "parent_info": {
-            "father_name": formData.Fathername,
-            "father_occupation": formData.FatherOcc,
-            "father_occupation_address": formData.FatOccAdd,
-            "father_phone_number": formData.PhoneFather,
-            "father_email": formData.EmailFather,
-            "mother_name": formData.Mothername,
-            "mother_occupation": formData.MotherOcc,
-            "mother_occupation_address": formData.MoOccAdd,
-            "mother_phone_number": formData.PhoneMother,
-            "mother_email": formData.EmailMother,
-        },}
-
-        )
-        sleep(2000);
-        console.log(finalData);
+        const isEmptyField = Object.values(applicationData).some(value => value === (""||false));
+        if (isEmptyField) {
+          alert("Please fill in all fields.");
+          return;
+        }
+        else{
+            setFinaldata({'email' : formData.Email,
+            'student_name': formData.Name,
+            'course': applicationData.Course,
+            'date_of_birth': formData.Dob,
+            'gender': formData.Gender,
+            'is_hostellite':(formData.Mode==="Hostelite")?true:false ,
+            'community':formData.Community ,
+            'religion': formData.Religion,
+            'native_place': formData.Native,
+            'blood_group': formData.Blood,
+            'height': formData.Height,
+            'weight': formData.Weight,
+            'caste': 'none',
+            'address_for_communication': formData.Addcom,
+            'date_of_admission': applicationData.DateofAdmit,
+            'address_local_guardian': formData.AddLocal,
+            'nationality': 'Indian',
+            'mother_tongue': formData.Language,
+            'father_name': formData.Fathername,
+            'father_occupation': formData.FatherOcc,
+            'father_occupation_address': formData.FatOccAdd,
+            'father_phone_number': formData.PhoneFather,
+            'father_email': formData.EmailFather,
+            'mother_name': formData.Mothername,
+            'mother_occupation': formData.MotherOcc,
+            'mother_occupation_address': formData.MoOccAdd,
+            'mother_phone_number': formData.PhoneMother,
+            'mother_email': formData.EmailMother,
+            'student_contact_no': formData.Mobile,
+            'student_email_id': formData.Email,
+            'mobile_1': formData.MobileFather,
+            'mobile_2': formData.MobileMother,
+            'mobile_3': formData.Mobile,
+            'guardian_mobile': formData.MobileLocal,}    
+            )
+            alert("Your response was submitted!!!") 
+            navigate('/student') 
+            sleep(1000);
+            console.log(finalData);
+        }
+        
     }
     const handleReset = () => {
         setFormData({

@@ -10,51 +10,60 @@ const Student = () => {
       currentDate = Date.now();
     } while (currentDate - date < milliseconds);
   }
-  const [SignUpData, setSignUpData] = useState({
-    username: "",
+  const [Application, setApplication] = useState({
     email: "",
     password: "",
   });
-  const [SignInData, setSignInData] = useState({
+  const [Admission, setAdmission] = useState({
     email: "",
     password: "",
   });
-  const handleSignUpChange =(e)=>{
+  const handleAdmissionChange =(e)=>{
     const { name, value, type, checked } = e.target;
-    setSignUpData(prevState => ({
+    setAdmission(prevState => ({
       ...prevState,
       [name]: type === 'checkbox' ? checked : value
     }));
 }
-  const handleSignInChange =(e)=>{
+  const handleApplicationChange =(e)=>{
     const { name, value, type, checked } = e.target;
-    setSignInData(prevState => ({
+    setApplication(prevState => ({
       ...prevState,
       [name]: type === 'checkbox' ? checked : value
     }));
 }
-const handleSignIn =()=>{
-  const isEmptyField = Object.values(SignInData).some(value => value === "");
+const handleAdmission =()=>{
+  const isEmptyField = Object.values(Admission).some(value => value === "");
         if (isEmptyField) {
           alert("Please fill in all fields.");
           return;
         }
         else{
           sleep(1000)
-          console.log(SignInData)
-          navigate('/student/form')
+          const data2={
+            name:"Admission",
+            email:Admission.email,
+            password:Admission.password
+          }
+          console.log(Admission)
+          navigate('/student/form',{state:data2})
         } 
 }
-const handleSignUp =()=>{
-  const isEmptyField = Object.values(SignUpData).some(value => value === "");
+const handleApplication =()=>{
+  const isEmptyField = Object.values(Application).some(value => value === "");
         if (isEmptyField) {
           alert("Please fill in all fields.");
           return;
         }
         else{
           sleep(1000)
-          console.log(SignUpData)         
-          navigate('/student/form')
+          const data1={
+            name:"Application",
+            email:Application.email,
+            password:Application.password
+          }
+          console.log(Application)         
+          navigate('/student/form',{state:data1})
         } 
 }
   const [swap, setSwap] = useState("")
@@ -65,52 +74,44 @@ const handleSignUp =()=>{
     setSwap("right-panel-active")
   }
   return (
+    // <CustomModal data={data}></CustomModal>
     <div className='w-screen h-screen flex flex-col'>
       <div className='flex flex-row basis-1/12 justify-center custom-gradient'>
-                <div className='flex flex-row basis-10/12 mt-2 justify-center'>
-                    <div className='flex basis-1/12 bg-bw-pic1 bg-contain bg-no-repeat'></div>
-                    <div className='flex flex-col basis-8/12'>
-                        <div className='text-4xl font-pavanam font-semibold mx-auto'>VELAMMAL MEDICAL COLLEGE</div>
-                        <div className='text-3xl font-pavanam font-semibold mx-auto'>HOSPITAL AND RESEARCH INSTITUTE</div>
-                    </div>
-                    <div className='flex flex-row-reverse basis-1/12 mt-5'>
+        <div className='flex flex-row basis-10/12 mt-2 justify-center'>
+          <div className='flex basis-1/12 bg-bw-pic1 bg-contain bg-no-repeat'></div>
+          <div className='flex flex-col basis-8/12'>
+            <div className='text-4xl font-pavanam font-semibold mx-auto'>VELAMMAL MEDICAL COLLEGE</div>
+            <div className='text-3xl font-pavanam font-semibold mx-auto'>HOSPITAL AND RESEARCH INSTITUTE</div>
+          </div>
+          <div className='flex flex-row-reverse basis-1/12 mt-5'>
                         
-                    </div>
-                </div>
-            </div>
-            <div className='flex basis-11/12 bg-blue-50'>
-      <div className={`student_container ${swap} w-fit h-fit m-auto`} id="container">
-      <div className="student_form-container student_sign-up-container">
-        <form className='student_form' action="#a">
-          <h1 className='student_h1'>Create Account</h1>
-          <div className="student_social-container">
-            <a href="#aa" className="student_a social"><i class="fa-brands fa-github"></i></a>
-            <a href="#aa" className="student_a social"><i class="fa-brands fa-google"></i></a>
-            <a href="#aa" className="student_a social"><i className="fab fa-linkedin-in"></i></a>
           </div>
-          <span className='student_span'>or use your email for registration</span>
-          <input className='student_input' type="text" placeholder="Name" name='username' value={SignUpData.username} onChange={handleSignUpChange} autocomplete="off"/>
-          <input className='student_input' type="email" placeholder="Email" name='email' value={SignUpData.email} onChange={handleSignUpChange} autocomplete="off"/>
-          <input className='student_input' type="password" placeholder="Password" name='password' value={SignUpData.password} onChange={handleSignUpChange} />
-          <div className='student_button mt-3' onClick={handleSignUp}>Sign Up</div>
-        </form>
+        </div>
       </div>
-      <div className="student_form-container student_sign-in-container">
-        <form action="#a" className='student_form'>
-          <h1 className='student_h1'>Sign in</h1>
-          <div className="student_social-container">
-            <a href="#dd" className="student_a social"><i class="fa-brands fa-github"></i></a>
-            <a href="#da" className="student_a social"
-              ><i class="fa-brands fa-google"></i></a>
-            <a href="#df" className="student_a social"><i className="fab fa-linkedin-in"></i></a>
+      <div className='flex basis-11/12 bg-blue-50'>
+        <div className={`student_container ${swap} w-fit h-fit m-auto `} id="container">
+          <div className="student_form-container student_sign-up-container">
+            <form className='student_form' action="#a">
+              <h1 className='student_h1'>Admission Form</h1>
+          
+              <span className='student_span'>Sign in</span>
+              <br></br>
+              <input className='student_input' type="email" placeholder="Email" name='email' value={Admission.email} onChange={handleAdmissionChange} autocomplete="off"/>
+              <input className='student_input' type="password" placeholder="Password" name='password' value={Admission.password} onChange={handleAdmissionChange} />
+              <br></br>
+              <div className='student_button mt-3' onClick={handleAdmission}>Log in</div>
+            </form>
           </div>
-          <span className='student_span'>or use your account</span>
-          <input className='student_input' type="email" placeholder="Email" name='email' value={SignInData.email} onChange={handleSignInChange} autocomplete="off"/>
-          <input className='student_input' type="password" placeholder="password" name='password' value={SignInData.Password} onChange={handleSignInChange} autocomplete="off"/>
-          <a href="#a" className='student_a'>Forgot your password?</a>
-          <div className='student_button' onClick={handleSignIn}>Sign In</div>
-        </form>
-      </div>
+          <div className="student_form-container student_sign-in-container">
+            <form action="#a" className='student_form'>
+              <h1 className='student_h1'>Application Form</h1>
+              <span className='student_span'>Sign in</span><br></br>
+              <input className='student_input' type="email" placeholder="Email" name='email' value={Application.email} onChange={handleApplicationChange} autocomplete="off"/>
+              <input className='student_input' type="password" placeholder="password" name='password' value={Application.password} onChange={handleApplicationChange} autocomplete="off"/>
+              <br></br>
+              <div className='student_button hover:cursor-pointer' onClick={handleApplication}>Log In</div>
+            </form>
+          </div>
       <div className="student_overlay-container">
         <div className="student_overlay">
           <div className="student_overlay-panel student_overlay-left">
@@ -118,12 +119,12 @@ const handleSignUp =()=>{
             <p className='student_p'>
               To keep connected with us please login with your personal info
             </p>
-            <button className="student_button ghost" id="signIn" onClick={swapAdmin}>Sign In</button>
+            <button className="student_button ghost" id="signIn" onClick={swapAdmin}>Application</button>
           </div>
           <div className="student_overlay-panel student_overlay-right">
             <h1 className='student_h1'>Hello, Friend!</h1>
             <p className='student_p'>Enter your personal details and start journey with us</p>
-            <button className="student_button ghost" id="signUp" onClick={swapStudent}>Sign Up</button>
+            <button className="student_button ghost" id="signUp" onClick={swapStudent}>Admission</button>
           </div>
         </div>
       </div>

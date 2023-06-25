@@ -2,8 +2,12 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import '../styles/styles.css';
 import ApplicationForm from "./ApplicationForm"
+import AdmissionForm from './AdmissionForm';
+import { useLocation } from 'react-router-dom';
 const RegistrationForm = () => {
     const navigate =useNavigate();
+    const location=useLocation();
+    const data=location.state;
     const handleLogOut = () =>{
         navigate('/student');
     }
@@ -27,8 +31,8 @@ const RegistrationForm = () => {
             </div>
             <div className='flex flex-col basis-11/12 bg-sky-50'>
                 <div className='flex flex-col basis-full'>
-                    <div className='flex w-4/6 bg-white m-auto shadow-custom'>
-                        <ApplicationForm></ApplicationForm>
+                    <div className='flex flex-col w-4/6 bg-white m-auto shadow-custom'>
+                        {data.name==="Application" ? (<ApplicationForm data={data}></ApplicationForm>) : (<AdmissionForm data={data}></AdmissionForm>)}
                     </div>
                 </div>
             </div>
